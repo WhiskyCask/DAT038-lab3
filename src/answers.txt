@@ -1,0 +1,58 @@
+Running the slow program
+------------------------
+
+Q: What is the complexity of findSimilarity?
+Answer in terms of N, the total number of 5-grams in the input files.
+Assume that the number of 5-grams that occur in more than one file is a small
+constant - that is, there is not much plagiarised text.
+
+Total O(D^2 * K) = O((DK)^2 / K) = O(N^2 / K) = O(N^2)
+
+A: O(N^2)
+
+Q: How long did the program take on the 'small' and 'medium' directories?
+Is the ratio between the times what you would expect, given the complexity?
+Explain very briefly why.
+
+A: Given that the medium document set contains about ten times more 5-grams than the small one and
+given the quadratic complexity of our algorithm we would expect the runtime to be about a hundred times
+longer for the medium document. However the time given from the output after running the program showed
+1.95 seconds for the small document set and 364.95 seconds for the medium one, which gives us a ratio of
+about 187 times longer runtime. Although with the hint that comes with the question in mind we can see
+that this is more or less two times slower than predicted.
+
+Q: How long do you predict the program would take to run on the 'huge'
+directory?
+
+A: Given that the runtime for the medium document set was 364.95 seconds and the huge set contains about twenty
+times as many 5-grams and the quadratic complexity of our algorithm we would assume the runtime to be about
+forty times big. So therefore we would predict the runtime to be 14 598 seconds or four hours three minutes and eighteen seconds.
+
+Using binary search trees
+-------------------------
+
+Q: Which of the trees usually become unbalanced?
+
+A: The files tree, we almost have the same height and size which is a worst case scenario
+
+Q (optional): Is there a simple way to stop these trees becoming unbalanced?
+
+A (optional): Remove the line of code where we sort the array of paths before creating the BST:s
+
+Using scapegoat trees
+---------------------
+
+Q: Now what is the total complexity of buildIndex and findSimilarity?
+Again, assume a total of N 5-grams, and a constant number of 5-grams that
+occur in more than one file.
+
+A: buildIndex: O(N), findSimilarity:
+
+Q (optional): What if the total similarity score is an arbitrary number S,
+rather than a small constant?
+
+A (optional):
+
+Q (optional): Did you find any text that was clearly copied?
+
+A (optional): Yes, badforbst/Find me.txt
