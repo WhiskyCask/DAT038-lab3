@@ -122,30 +122,21 @@ public class ScapegoatTree<Key extends Comparable<Key>, Value> {
         // TO DO: finish implementing put.
 		// If you like you can start from the code for put in BST.java.
         // Read the lab instructions for more hints!
-        if (cmp < 0) {
-            // key is less than node.key
-            node.left = put(node.left, key, val);
-        } else if (cmp > 0) {
-            // key is greater than node.key
-            node.right = put(node.right, key, val);
-        } else {
-            // key is equal to node.key
-            node.val = val;
-        }
+        if (cmp < 0) node.left = put(node.left, key, val);
+        else if (cmp > 0) node.right = put(node.right, key, val);
+        else node.val = val;
         node.size = 1 + size(node.left) + size(node.right);
         node.height = 1 + Math.max(height(node.left), height(node.right));
 
         if (node.height > alpha * log2(node.size))
             node = rebuild(node);
         return node;
-
-        //throw new UnsupportedOperationException();
     }
 
 	// Rebuild a tree to make it perfectly balanced.
 	// You do not need to change this method, but need to define 'inorder'.
     private Node rebuild(Node node) {
-        ArrayList<Node> nodes = new ArrayList<>(size(node)); // Added initialcapacity to stop the need of copying and reallocating memory
+        ArrayList<Node> nodes = new ArrayList<>(size(node));
         inorder(node, nodes);
         return makeBalancedBST(nodes, 0, nodes.size()-1);
     }

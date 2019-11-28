@@ -99,16 +99,16 @@ public class Lab3 {
         // N.B. Path is Java's class for representing filenames
         // PathPair represents a pair of Paths (see PathPair.java)
         ScapegoatTree<PathPair, Integer> similarity = new ScapegoatTree<>();
-        for (Ngram ngram : index.keys()) {
+        for (Ngram ngram : index.keys()) {                                      // O(N)
             ArrayList<Path> paths = index.get(ngram);
             for (int i = 0; i < paths.size() - 1; i++) {
                 for (int j = i + 1; j < paths.size(); j++) {
-                    PathPair pair = new PathPair(paths.get(j), paths.get(i));
+                    PathPair pair = new PathPair(paths.get(j), paths.get(i));   // O(1)
 
-                    if (!similarity.contains(pair))
-                        similarity.put(pair, 0);
+                    if (!similarity.contains(pair))                             // O(logK)
+                        similarity.put(pair, 0);                            // O(logK)
 
-                    similarity.put(pair, similarity.get(pair) + 1);
+                    similarity.put(pair, similarity.get(pair) + 1);         // O(logK)
                 }
             }
         }
