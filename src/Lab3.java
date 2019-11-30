@@ -81,7 +81,7 @@ public class Lab3 {
     static ScapegoatTree<Ngram, ArrayList<Path>> buildIndex(ScapegoatTree<Path, Ngram[]> files) {
         ScapegoatTree<Ngram, ArrayList<Path>> index = new ScapegoatTree<>();
         // TO DO: build index of n-grams
-        for (Path path : files.keys()) {                        // O(D)
+        for (Path path : files.keys()) {                        // O(1)
             for (Ngram ngram : files.get(path)) {               // O(N)
 
                 if (!index.contains(ngram))                     // O(logN)
@@ -100,9 +100,9 @@ public class Lab3 {
         // PathPair represents a pair of Paths (see PathPair.java)
         ScapegoatTree<PathPair, Integer> similarity = new ScapegoatTree<>();
         for (Ngram ngram : index.keys()) {                                      // O(N)
-            ArrayList<Path> paths = index.get(ngram);
-            for (int i = 0; i < paths.size() - 1; i++) {
-                for (int j = i + 1; j < paths.size(); j++) {
+            ArrayList<Path> paths = index.get(ngram);                           // O(logN)
+            for (int i = 0; i < paths.size() - 1; i++) {                        // O(K)
+                for (int j = i + 1; j < paths.size(); j++) {                    // O(K)
                     PathPair pair = new PathPair(paths.get(j), paths.get(i));   // O(1)
 
                     if (!similarity.contains(pair))                             // O(logK)
@@ -112,27 +112,6 @@ public class Lab3 {
                 }
             }
         }
-
-        /*
-        for (Path path1: files.keys()) {                                    // O(D)
-            for (Path path2: files.keys()) {                                // O(D)
-                if (path1.equals(path2)) continue;                          // O(1)
-                for (Ngram ngram1: files.get(path1)) {
-                    for (Ngram ngram2: files.get(path2)) {
-                        if (ngram1.equals(ngram2)) {                        // O(K)
-                            PathPair pair = new PathPair(path1, path2);
-
-                            if (!similarity.contains(pair))
-                                similarity.put(pair, 0);
-
-                            similarity.put(pair, similarity.get(pair)+1);
-                        }
-                    }
-                }
-            }
-        }
-        */
-
         return similarity;
     }
 
