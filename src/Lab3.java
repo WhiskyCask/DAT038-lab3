@@ -70,7 +70,6 @@ public class Lab3 {
             // learn about it, see e.g.
             // https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#package.description
             // or https://stackify.com/streams-guide-java-8/
-            ngrams = Arrays.stream(ngrams).distinct().toArray(Ngram[]::new);
             files.put(path, ngrams);
         }
 
@@ -101,14 +100,14 @@ public class Lab3 {
         ScapegoatTree<PathPair, Integer> similarity = new ScapegoatTree<>();
         for (Ngram ngram : index.keys()) {                                      // O(N)
             ArrayList<Path> paths = index.get(ngram);                           // O(logN)
-            for (int i = 0; i < paths.size() - 1; i++) {                        // O(K)
-                for (int j = i + 1; j < paths.size(); j++) {                    // O(K)
+            for (int i = 0; i < paths.size() - 1; i++) {                        // O(S)
+                for (int j = i + 1; j < paths.size(); j++) {                    // O(S)
                     PathPair pair = new PathPair(paths.get(j), paths.get(i));   // O(1)
 
-                    if (!similarity.contains(pair))                             // O(logK)
-                        similarity.put(pair, 0);                            // O(logK)
+                    if (!similarity.contains(pair))                             // O(logS)
+                        similarity.put(pair, 0);                            // O(logS)
 
-                    similarity.put(pair, similarity.get(pair) + 1);         // O(logK)
+                    similarity.put(pair, similarity.get(pair) + 1);         // O(logS)
                 }
             }
         }

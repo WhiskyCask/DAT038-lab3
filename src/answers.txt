@@ -33,11 +33,11 @@ Using binary search trees
 
 Q: Which of the trees usually become unbalanced?
 
-A: The files tree, we almost have the same height and size which is a worst case scenario
+A: The files tree, we have a height of 127 and size of 128 which is a worst case scenario
 
 Q (optional): Is there a simple way to stop these trees becoming unbalanced?
 
-A (optional): Remove the line of code where we sort the array of paths before creating the BST:s
+A (optional): Comment out the line of code where we sort the array of paths before creating the BST:s
 
 Using scapegoat trees
 ---------------------
@@ -51,8 +51,8 @@ A: buildIndex: O(NlogN), findSimilarity: O(NlogN), Total: O(NlogN)
 Q (optional): What if the total similarity score is an arbitrary number S,
 rather than a small constant?
 
-A (optional):
+A (optional): O(NlogN * S^2logS)
 
 Q (optional): Did you find any text that was clearly copied?
 
-A (optional): Yes, badforbst/Find me.txt
+A (optional): Yes, the file Find me.txt.
