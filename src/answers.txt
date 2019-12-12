@@ -51,8 +51,8 @@ A: buildIndex: O(NlogN), findSimilarity: O(NlogN), Total: O(NlogN)
 Q (optional): What if the total similarity score is an arbitrary number S,
 rather than a small constant?
 
-A (optional): O(NlogN * S^2logS)
+A (optional):
 
 Q (optional): Did you find any text that was clearly copied?
 
-A (optional): Yes, the file Find me.txt.
+A (optional):

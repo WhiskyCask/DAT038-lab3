@@ -43,7 +43,7 @@ public class Lab3 {
             stopwatch2.finished("In total the program");
 
             // Print out some statistics
-            System.out.println("\nBST balance statistics:");
+            System.out.println("\nScapegoatTree balance statistics:");
             System.out.printf("  files: size %d, height %d\n", files.size(), files.height());
             System.out.printf("  index: size %d, height %d\n", index.size(), index.height());
             System.out.printf("  similarity: size %d, height %d\n", similarity.size(), similarity.height());
@@ -70,6 +70,7 @@ public class Lab3 {
             // learn about it, see e.g.
             // https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html#package.description
             // or https://stackify.com/streams-guide-java-8/
+            ngrams = Arrays.stream(ngrams).distinct().toArray(Ngram[]::new);
             files.put(path, ngrams);
         }
 
@@ -98,6 +99,7 @@ public class Lab3 {
         // N.B. Path is Java's class for representing filenames
         // PathPair represents a pair of Paths (see PathPair.java)
         ScapegoatTree<PathPair, Integer> similarity = new ScapegoatTree<>();
+
         for (Ngram ngram : index.keys()) {                                      // O(N)
             ArrayList<Path> paths = index.get(ngram);                           // O(logN)
             for (int i = 0; i < paths.size() - 1; i++) {                        // O(S)
@@ -111,6 +113,7 @@ public class Lab3 {
                 }
             }
         }
+
         return similarity;
     }
 
